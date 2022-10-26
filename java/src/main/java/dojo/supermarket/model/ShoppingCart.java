@@ -9,7 +9,6 @@ import java.util.Map;
 
 public class ShoppingCart {
 
-    private final Map<Product, Double> productQuantities = new HashMap<>();
     private final Items items = new Items();
 
     List<ProductQuantity> getItems() {
@@ -21,16 +20,11 @@ public class ShoppingCart {
     }
 
     Map<Product, Double> productQuantities() {
-        return Collections.unmodifiableMap(productQuantities);
+        return Collections.unmodifiableMap(items.getProductQuantities());
     }
 
     public void addItemQuantity(Product product, double quantity) {
         items.addItem(product, quantity);
-        if (productQuantities.containsKey(product)) {
-            productQuantities.put(product, productQuantities.get(product) + quantity);
-        } else {
-            productQuantities.put(product, quantity);
-        }
     }
 
     void handleOffers(Receipt receipt, Map<Product, Offer> offers, SupermarketCatalog catalog) {

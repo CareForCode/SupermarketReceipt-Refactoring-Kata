@@ -1,8 +1,7 @@
 package dojo.supermarket.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Items {
     final List<ProductQuantity> items = new ArrayList<>();
@@ -23,5 +22,12 @@ public class Items {
                 .filter(productQuantity -> productQuantity.getProduct().equals(product))
                 .mapToDouble(ProductQuantity::getQuantity)
                 .sum();
+    }
+
+    Map<Product,Double> getProductQuantities() {
+        return items.stream()
+                .map(ProductQuantity::getProduct)
+                .distinct()
+                .collect(Collectors.toMap(product -> product, this::getQuantity));
     }
 }
