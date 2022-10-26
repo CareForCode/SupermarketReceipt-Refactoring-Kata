@@ -60,7 +60,7 @@ public class ShoppingCart {
         } else if (offer.offerType == SpecialOfferType.FIVE_FOR_AMOUNT) {
             discountPolicy = new FiveForAmountPolicy(product, quantity, unitPrice, offer);
         } else if (offer.offerType == SpecialOfferType.TEN_PERCENT_DISCOUNT) {
-            discountPolicy = new TenPercentPolicy();
+            discountPolicy = new TenPercentPolicy(product, quantity, unitPrice, offer);
         } else {
             discountPolicy = new NoDiscountPolicy();
         }

@@ -5,8 +5,21 @@ import dojo.supermarket.model.Offer;
 import dojo.supermarket.model.Product;
 
 public class TenPercentPolicy implements DiscountPolicy {
+
+    private final Product product;
+    private final double quantity;
+    private final double unitPrice;
+    private final Offer offer;
+
+    public TenPercentPolicy(Product product, double quantity, double unitPrice, Offer offer) {
+        this.product = product;
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+        this.offer = offer;
+    }
+
     @Override
     public Discount getDiscount(Product product, double quantity, double unitPrice, int quantityAsInt, Offer offer) {
-        return new Discount(product, offer.argument + "% off", -quantity * unitPrice * offer.argument / 100.0);
+        return new Discount(this.product, this.offer.argument + "% off", -this.quantity * this.unitPrice * this.offer.argument / 100.0);
     }
 }
