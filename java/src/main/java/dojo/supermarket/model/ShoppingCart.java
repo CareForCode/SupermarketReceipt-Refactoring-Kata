@@ -1,5 +1,6 @@
 package dojo.supermarket.model;
 
+import dojo.supermarket.model.discountpolicies.ThreeForTwoPolicy;
 import dojo.supermarket.model.discountpolicies.TwoForAmountPolicy;
 
 import java.util.ArrayList;
@@ -53,7 +54,8 @@ public class ShoppingCart {
 
     private Discount getDiscount(Product product, double quantity, Offer offer, double unitPrice, int quantityAsInt) {
         if (offer.offerType == SpecialOfferType.THREE_FOR_TWO) {
-            return getDiscountForThreeForTwo(product, quantity, unitPrice, quantityAsInt);
+            ThreeForTwoPolicy threeForTwoPolicy = new ThreeForTwoPolicy();
+            return threeForTwoPolicy.getDiscount(product, quantity, unitPrice, quantityAsInt, offer);
         } else if (offer.offerType == SpecialOfferType.TWO_FOR_AMOUNT) {
             TwoForAmountPolicy twoForAmountPolicy = new TwoForAmountPolicy();
             return twoForAmountPolicy.getDiscount(product, quantity, unitPrice, quantityAsInt, offer);
@@ -79,32 +81,4 @@ public class ShoppingCart {
         return null;
     }
 
-    private Discount getDiscountForTwoForAmount(Product product, double quantity, Offer offer, double unitPrice, int quantityAsInt) {
-        int minimumAmountForOffer = 2;
-        if (quantityAsInt >= 2) {
-            return getDiscountForTwoForAmount(product, quantity, offer, unitPrice, quantityAsInt, minimumAmountForOffer);
-        }
-        return null;
-    }
-
-    private Discount getDiscountForThreeForTwo(Product product, double quantity, double unitPrice, int quantityAsInt) {
-        int minimumAmountForOffer = 3;
-        int numberOfXs = quantityAsInt / minimumAmountForOffer;
-        if (quantityAsInt > 2) {
-            double discountAmount = quantity * unitPrice - ((numberOfXs * 2 * unitPrice) + quantityAsInt % 3 * unitPrice);
-            return new Discount(product, "3 for 2", -discountAmount);
-        }
-        return null;
-    }
-
-    private Discount getDiscountForTwoForAmount(Product product, double quantity, Offer offer, double unitPrice, int quantityAsInt, int x) {
-        Discount discount;
-        int intDivision = quantityAsInt / x;
-        double pricePerUnit = offer.argument * intDivision;
-        double theTotal = (quantityAsInt % 2) * unitPrice;
-        double total = pricePerUnit + theTotal;
-        double discountN = unitPrice * quantity - total;
-        discount = new Discount(product, "2 for " + offer.argument, -discountN);
-        return discount;
-    }
 }
