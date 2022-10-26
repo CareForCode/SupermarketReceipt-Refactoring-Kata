@@ -1,5 +1,6 @@
 package dojo.supermarket.model;
 
+import dojo.supermarket.model.discountpolicies.FiveForAmountPolicy;
 import dojo.supermarket.model.discountpolicies.ThreeForTwoPolicy;
 import dojo.supermarket.model.discountpolicies.TwoForAmountPolicy;
 
@@ -60,7 +61,8 @@ public class ShoppingCart {
             TwoForAmountPolicy twoForAmountPolicy = new TwoForAmountPolicy();
             return twoForAmountPolicy.getDiscount(product, quantity, unitPrice, quantityAsInt, offer);
         } else if (offer.offerType == SpecialOfferType.FIVE_FOR_AMOUNT) {
-            return getDiscountForFiveForAmount(product, quantity, offer, unitPrice, quantityAsInt);
+            FiveForAmountPolicy fiveForAmountPolicy = new FiveForAmountPolicy();
+            return fiveForAmountPolicy.getDiscount(product, quantity, unitPrice, quantityAsInt, offer);
         } else if (offer.offerType == SpecialOfferType.TEN_PERCENT_DISCOUNT) {
             return getDiscountForTenPercent(product, quantity, offer, unitPrice);
         }
@@ -69,16 +71,6 @@ public class ShoppingCart {
 
     private Discount getDiscountForTenPercent(Product product, double quantity, Offer offer, double unitPrice) {
         return new Discount(product, offer.argument + "% off", -quantity * unitPrice * offer.argument / 100.0);
-    }
-
-    private Discount getDiscountForFiveForAmount(Product product, double quantity, Offer offer, double unitPrice, int quantityAsInt) {
-        int minimumAmountForOffer = 5;
-        int numberOfXs = quantityAsInt / minimumAmountForOffer;
-        if (quantityAsInt >= 5) {
-            double discountTotal = unitPrice * quantity - (offer.argument * numberOfXs + quantityAsInt % 5 * unitPrice);
-            return new Discount(product, minimumAmountForOffer + " for " + offer.argument, -discountTotal);
-        }
-        return null;
     }
 
 }
