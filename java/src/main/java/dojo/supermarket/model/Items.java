@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Items {
-    final List<ProductQuantity> items = new ArrayList<>();
+    private final List<ProductQuantity> items = new ArrayList<>();
 
     public Items() {
     }
@@ -25,9 +25,9 @@ public class Items {
     }
 
     Map<Product,Double> getProductQuantities() {
-        return items.stream()
+        return Collections.unmodifiableMap(items.stream()
                 .map(ProductQuantity::getProduct)
                 .distinct()
-                .collect(Collectors.toMap(product -> product, this::getQuantity));
+                .collect(Collectors.toMap(product -> product, this::getQuantity)));
     }
 }

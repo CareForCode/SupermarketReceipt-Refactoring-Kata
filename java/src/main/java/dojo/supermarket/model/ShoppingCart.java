@@ -20,7 +20,7 @@ public class ShoppingCart {
     }
 
     Map<Product, Double> productQuantities() {
-        return Collections.unmodifiableMap(items.getProductQuantities());
+        return items.getProductQuantities();
     }
 
     public void addItemQuantity(Product product, double quantity) {
