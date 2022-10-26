@@ -1,6 +1,7 @@
 package dojo.supermarket.model;
 
 import dojo.supermarket.model.discountpolicies.FiveForAmountPolicy;
+import dojo.supermarket.model.discountpolicies.TenPercentPolicy;
 import dojo.supermarket.model.discountpolicies.ThreeForTwoPolicy;
 import dojo.supermarket.model.discountpolicies.TwoForAmountPolicy;
 
@@ -64,13 +65,10 @@ public class ShoppingCart {
             FiveForAmountPolicy fiveForAmountPolicy = new FiveForAmountPolicy();
             return fiveForAmountPolicy.getDiscount(product, quantity, unitPrice, quantityAsInt, offer);
         } else if (offer.offerType == SpecialOfferType.TEN_PERCENT_DISCOUNT) {
-            return getDiscountForTenPercent(product, quantity, offer, unitPrice);
+            TenPercentPolicy tenPercentPolicy = new TenPercentPolicy();
+            return tenPercentPolicy.getDiscount(product, quantity, unitPrice, quantityAsInt, offer);
         }
         return null;
-    }
-
-    private Discount getDiscountForTenPercent(Product product, double quantity, Offer offer, double unitPrice) {
-        return new Discount(product, offer.argument + "% off", -quantity * unitPrice * offer.argument / 100.0);
     }
 
 }
