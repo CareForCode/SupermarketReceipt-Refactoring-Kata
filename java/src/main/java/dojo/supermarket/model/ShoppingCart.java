@@ -67,8 +67,7 @@ public class ShoppingCart {
     }
 
     private Discount getDiscountForFiveForAmount(Product product, double quantity, Offer offer, double unitPrice, int quantityAsInt) {
-        int minimumAmountForOffer;
-        minimumAmountForOffer = 5;
+        int minimumAmountForOffer = 5;
         int numberOfXs = quantityAsInt / minimumAmountForOffer;
         if (quantityAsInt >= 5) {
             double discountTotal = unitPrice * quantity - (offer.argument * numberOfXs + quantityAsInt % 5 * unitPrice);
@@ -78,8 +77,7 @@ public class ShoppingCart {
     }
 
     private Discount getDiscountForTwoForAmount(Product product, double quantity, Offer offer, double unitPrice, int quantityAsInt) {
-        int minimumAmountForOffer;
-        minimumAmountForOffer = 2;
+        int minimumAmountForOffer = 2;
         if (quantityAsInt >= 2) {
             return getDiscountForTwoForAmount(product, quantity, offer, unitPrice, quantityAsInt, minimumAmountForOffer);
         }
@@ -87,8 +85,7 @@ public class ShoppingCart {
     }
 
     private Discount getDiscountForThreeForTwo(Product product, double quantity, double unitPrice, int quantityAsInt) {
-        int minimumAmountForOffer;
-        minimumAmountForOffer = 3;
+        int minimumAmountForOffer = 3;
         int numberOfXs = quantityAsInt / minimumAmountForOffer;
         if (quantityAsInt > 2) {
             double discountAmount = quantity * unitPrice - ((numberOfXs * 2 * unitPrice) + quantityAsInt % 3 * unitPrice);
