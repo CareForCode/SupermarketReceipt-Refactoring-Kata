@@ -1,9 +1,6 @@
 package dojo.supermarket.model;
 
-import dojo.supermarket.model.discountpolicies.FiveForAmountPolicy;
-import dojo.supermarket.model.discountpolicies.TenPercentPolicy;
-import dojo.supermarket.model.discountpolicies.ThreeForTwoPolicy;
-import dojo.supermarket.model.discountpolicies.TwoForAmountPolicy;
+import dojo.supermarket.model.discountpolicies.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,20 +52,19 @@ public class ShoppingCart {
     }
 
     private Discount getDiscount(Product product, double quantity, Offer offer, double unitPrice, int quantityAsInt) {
+        DiscountPolicy discountPolicy;
         if (offer.offerType == SpecialOfferType.THREE_FOR_TWO) {
-            ThreeForTwoPolicy threeForTwoPolicy = new ThreeForTwoPolicy();
-            return threeForTwoPolicy.getDiscount(product, quantity, unitPrice, quantityAsInt, offer);
+            discountPolicy = new ThreeForTwoPolicy();
         } else if (offer.offerType == SpecialOfferType.TWO_FOR_AMOUNT) {
-            TwoForAmountPolicy twoForAmountPolicy = new TwoForAmountPolicy();
-            return twoForAmountPolicy.getDiscount(product, quantity, unitPrice, quantityAsInt, offer);
+            discountPolicy = new TwoForAmountPolicy();
         } else if (offer.offerType == SpecialOfferType.FIVE_FOR_AMOUNT) {
-            FiveForAmountPolicy fiveForAmountPolicy = new FiveForAmountPolicy();
-            return fiveForAmountPolicy.getDiscount(product, quantity, unitPrice, quantityAsInt, offer);
+            discountPolicy = new FiveForAmountPolicy();
         } else if (offer.offerType == SpecialOfferType.TEN_PERCENT_DISCOUNT) {
-            TenPercentPolicy tenPercentPolicy = new TenPercentPolicy();
-            return tenPercentPolicy.getDiscount(product, quantity, unitPrice, quantityAsInt, offer);
+            discountPolicy = new TenPercentPolicy();
+        } else {
+            discountPolicy = new NoDiscountPolicy();
         }
-        return null;
+        return discountPolicy.getDiscount(product, quantity, unitPrice, quantityAsInt, offer);
     }
 
 }
