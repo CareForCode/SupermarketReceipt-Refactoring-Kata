@@ -2,7 +2,6 @@ package dojo.supermarket.model;
 
 import dojo.supermarket.model.discountpolicies.*;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -10,11 +9,11 @@ import java.util.Map;
 
 public class ShoppingCart {
 
-    private final List<ProductQuantity> items = new ArrayList<>();
     private final Map<Product, Double> productQuantities = new HashMap<>();
+    private final Items items = new Items();
 
     List<ProductQuantity> getItems() {
-        return Collections.unmodifiableList(items);
+        return items.getItems();
     }
 
     void addItem(Product product) {
@@ -26,7 +25,7 @@ public class ShoppingCart {
     }
 
     public void addItemQuantity(Product product, double quantity) {
-        items.add(new ProductQuantity(product, quantity));
+        items.addItem(product, quantity);
         if (productQuantities.containsKey(product)) {
             productQuantities.put(product, productQuantities.get(product) + quantity);
         } else {
