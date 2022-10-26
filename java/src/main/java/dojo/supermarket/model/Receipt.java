@@ -1,19 +1,16 @@
 package dojo.supermarket.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Receipt {
 
-    private final List<Discount> discounts = new ArrayList<>();
     public final ReceiptItems receiptItems = new ReceiptItems();
+    public final Discounts discounts = new Discounts();
 
     public double getTotalPrice() {
         double total = 0.0;
         total = receiptItems.getTotal(total);
-        for (Discount discount : discounts) {
-            total += discount.getDiscountAmount();
-        }
+        total = discounts.getTotalDiscounts(total);
         return total;
     }
 
@@ -21,11 +18,7 @@ public class Receipt {
         return receiptItems.getItems();
     }
 
-    public void addDiscount(Discount discount) {
-        discounts.add(discount);
-    }
-
     public List<Discount> getDiscounts() {
-        return discounts;
+        return discounts.getDiscounts();
     }
 }
