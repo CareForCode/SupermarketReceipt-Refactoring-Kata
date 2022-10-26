@@ -21,7 +21,7 @@ public class FiveForAmountPolicy implements DiscountPolicy {
     }
 
     @Override
-    public Discount getDiscount(Product product, double quantity, double unitPrice, int quantityAsInt, Offer offer) {
+    public Discount getDiscount() {
         int minimumAmountForOffer = 5;
         int numberOfXs = this.quantityAsInt / minimumAmountForOffer;
         if (this.quantityAsInt >= 5) {

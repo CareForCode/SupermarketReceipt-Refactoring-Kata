@@ -19,7 +19,7 @@ public class TenPercentPolicy implements DiscountPolicy {
     }
 
     @Override
-    public Discount getDiscount(Product product, double quantity, double unitPrice, int quantityAsInt, Offer offer) {
+    public Discount getDiscount() {
         return new Discount(this.product, this.offer.argument + "% off", -this.quantity * this.unitPrice * this.offer.argument / 100.0);
     }
 }

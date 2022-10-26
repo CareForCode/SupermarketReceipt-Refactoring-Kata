@@ -21,7 +21,7 @@ public class TwoForAmountPolicy implements DiscountPolicy {
     }
 
     @Override
-    public Discount getDiscount(Product product, double quantity, double unitPrice, int quantityAsInt, Offer offer) {
+    public Discount getDiscount() {
         int minimumAmountForOffer = 2;
         if (this.quantityAsInt >= 2) {
             Discount discount;

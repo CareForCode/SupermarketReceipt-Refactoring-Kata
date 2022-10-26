@@ -64,7 +64,7 @@ public class ShoppingCart {
         } else {
             discountPolicy = new NoDiscountPolicy();
         }
-        return discountPolicy.getDiscount(product, quantity, unitPrice, quantityAsInt, offer);
+        return discountPolicy.getDiscount();
     }
 
 }
