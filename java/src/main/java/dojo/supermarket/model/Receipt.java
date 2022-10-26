@@ -10,9 +10,7 @@ public class Receipt {
 
     public double getTotalPrice() {
         double total = 0.0;
-        for (ReceiptItem item : receiptItems.getItems()) {
-            total += item.getTotalPrice();
-        }
+        total = receiptItems.getTotal(total);
         for (Discount discount : discounts) {
             total += discount.getDiscountAmount();
         }

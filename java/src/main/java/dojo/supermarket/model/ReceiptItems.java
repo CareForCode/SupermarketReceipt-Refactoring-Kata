@@ -17,4 +17,11 @@ public class ReceiptItems {
     public void addProduct(Product p, double quantity, double price, double totalPrice) {
         items.add(new ReceiptItem(p, quantity, price, totalPrice));
     }
+
+    double getTotal(double total) {
+        for (ReceiptItem item : getItems()) {
+            total += item.getTotalPrice();
+        }
+        return total;
+    }
 }
