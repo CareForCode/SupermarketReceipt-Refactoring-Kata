@@ -45,14 +45,10 @@ public class ShoppingCart {
 
     private void applyOffer(Receipt receipt, SupermarketCatalog catalog, Product product, double quantity, Offer offer) {
         double unitPrice = catalog.getUnitPrice(product);
-        Discount discount = getDiscount(product, quantity, offer, unitPrice);
+        DiscountPolicy discountPolicy = getDiscountPolicy(product, quantity, offer, unitPrice);
+        Discount discount = discountPolicy.getDiscount();
         if (discount != null)
             receipt.addDiscount(discount);
-    }
-
-    private Discount getDiscount(Product product, double quantity, Offer offer, double unitPrice) {
-        DiscountPolicy discountPolicy = getDiscountPolicy(product, quantity, offer, unitPrice);
-        return discountPolicy.getDiscount();
     }
 
     private DiscountPolicy getDiscountPolicy(Product product, double quantity, Offer offer, double unitPrice) {
