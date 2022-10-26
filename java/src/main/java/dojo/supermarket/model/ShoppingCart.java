@@ -56,9 +56,9 @@ public class ShoppingCart {
         if (offer.offerType == SpecialOfferType.THREE_FOR_TWO) {
             discountPolicy = new ThreeForTwoPolicy(product, quantity, unitPrice);
         } else if (offer.offerType == SpecialOfferType.TWO_FOR_AMOUNT) {
-            discountPolicy = new TwoForAmountPolicy(product, quantity, unitPrice, quantityAsInt, offer);
+            discountPolicy = new TwoForAmountPolicy(product, quantity, unitPrice, offer);
         } else if (offer.offerType == SpecialOfferType.FIVE_FOR_AMOUNT) {
-            discountPolicy = new FiveForAmountPolicy();
+            discountPolicy = new FiveForAmountPolicy(product, quantity, unitPrice, offer);
         } else if (offer.offerType == SpecialOfferType.TEN_PERCENT_DISCOUNT) {
             discountPolicy = new TenPercentPolicy();
         } else {

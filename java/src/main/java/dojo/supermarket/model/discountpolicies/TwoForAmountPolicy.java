@@ -12,7 +12,7 @@ public class TwoForAmountPolicy implements DiscountPolicy {
     private final int quantityAsInt;
     private final Offer offer;
 
-    public TwoForAmountPolicy(Product product, double quantity, double unitPrice, double quantityAsInt, Offer offer) {
+    public TwoForAmountPolicy(Product product, double quantity, double unitPrice, Offer offer) {
         this.product = product;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
