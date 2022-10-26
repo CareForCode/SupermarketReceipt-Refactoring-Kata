@@ -54,7 +54,7 @@ public class ShoppingCart {
     private Discount getDiscount(Product product, double quantity, Offer offer, double unitPrice, int quantityAsInt) {
         DiscountPolicy discountPolicy;
         if (offer.offerType == SpecialOfferType.THREE_FOR_TWO) {
-            discountPolicy = new ThreeForTwoPolicy();
+            discountPolicy = new ThreeForTwoPolicy(product, quantity, unitPrice);
         } else if (offer.offerType == SpecialOfferType.TWO_FOR_AMOUNT) {
             discountPolicy = new TwoForAmountPolicy();
         } else if (offer.offerType == SpecialOfferType.FIVE_FOR_AMOUNT) {
