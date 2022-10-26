@@ -17,4 +17,11 @@ public class Items {
     void addItem(Product product, double quantity) {
         items.add(new ProductQuantity(product, quantity));
     }
+
+    double getQuantity(Product product) {
+        return items.stream()
+                .filter(productQuantity -> productQuantity.getProduct().equals(product))
+                .mapToDouble(ProductQuantity::getQuantity)
+                .sum();
+    }
 }
