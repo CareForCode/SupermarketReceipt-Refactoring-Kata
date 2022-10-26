@@ -1,5 +1,7 @@
 package dojo.supermarket.model;
 
+import dojo.supermarket.model.discountpolicies.TwoForAmountPolicy;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
