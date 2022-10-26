@@ -1,6 +1,6 @@
 package dojo.supermarket.model;
 
-public class DiscountForTwoForAmountPolicy implements DiscountPolicy {
+public class TwoForAmountPolicy implements DiscountPolicy {
 
     @Override
     public Discount getDiscount(Product product, double quantity, double unitPrice, int quantityAsInt, Offer offer) {

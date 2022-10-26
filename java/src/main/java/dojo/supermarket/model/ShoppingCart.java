@@ -53,8 +53,8 @@ public class ShoppingCart {
         if (offer.offerType == SpecialOfferType.THREE_FOR_TWO) {
             return getDiscountForThreeForTwo(product, quantity, unitPrice, quantityAsInt);
         } else if (offer.offerType == SpecialOfferType.TWO_FOR_AMOUNT) {
-            DiscountForTwoForAmountPolicy discountForTwoForAmountPolicy = new DiscountForTwoForAmountPolicy();
-            return discountForTwoForAmountPolicy.getDiscount(product, quantity, unitPrice, quantityAsInt, offer);
+            TwoForAmountPolicy twoForAmountPolicy = new TwoForAmountPolicy();
+            return twoForAmountPolicy.getDiscount(product, quantity, unitPrice, quantityAsInt, offer);
         } else if (offer.offerType == SpecialOfferType.FIVE_FOR_AMOUNT) {
             return getDiscountForFiveForAmount(product, quantity, offer, unitPrice, quantityAsInt);
         } else if (offer.offerType == SpecialOfferType.TEN_PERCENT_DISCOUNT) {
