@@ -57,4 +57,21 @@ public class ShoppingCart {
         }
     }
 
+    Receipt getReceipt(SupermarketCatalog catalog) {
+        Receipt receipt = new Receipt();
+        for (ProductQuantity pq: getItems()) {
+            Product p = pq.getProduct();
+            double quantity = pq.getQuantity();
+            double unitPrice = catalog.getUnitPrice(p);
+            double price = quantity * unitPrice;
+            receipt.receiptItems.addProduct(p, quantity, unitPrice, price);
+        }
+        return receipt;
+    }
+
+    Receipt getReceipt(Map<Product, Offer> offers, SupermarketCatalog catalog) {
+        Receipt receipt = getReceipt(catalog);
+        handleOffers(receipt, offers, catalog);
+        return receipt;
+    }
 }
