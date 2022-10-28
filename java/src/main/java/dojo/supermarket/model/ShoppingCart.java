@@ -29,9 +29,9 @@ public class ShoppingCart {
 
     void handleOffers(Receipt receipt, Map<Product, Offer> offers, SupermarketCatalog catalog) {
         for (Product product: productQuantities().keySet()) {
-            double quantity = items.getQuantity(product);
+            double quantityTest = items.getQuantity(product);
             if (offers.containsKey(product)) {
-                applyOffer(receipt, catalog, product, quantity, offers.get(product));
+                applyOffer(receipt, catalog, product, quantityTest, offers.get(product));
             }
         }
     }
